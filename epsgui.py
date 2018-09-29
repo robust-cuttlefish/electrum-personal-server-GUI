@@ -233,36 +233,8 @@ def start_eps():
 
 def start_eps_rescan(bh):
     start_eps()
-    from configparser import ConfigParser, NoSectionError, NoOptionError
-    from eps.jsonrpc import JsonRpc, JsonRpcError
-    from datetime import datetime
-    try:
-        config = ConfigParser()
-        config.read(["eps.cfg"])
-        config.options("master-public-keys")
-    except NoSectionError:
-        print("Non-existant configuration file `eps.cfg`")
-        return
-    try:
-        rpc_u = config.get("bitcoin-rpc", "rpc_user")
-        rpc_p = config.get("bitcoin-rpc", "rpc_password")
-    except NoOptionError:
-        rpc_u, rpc_p = server.obtain_rpc_username_password(config.get(
-            "bitcoin-rpc", "datadir"))
-    if rpc_u == None:
-        return
-    rpc = JsonRpc(host = config.get("bitcoin-rpc", "host"),
-        port = int(config.get("bitcoin-rpc", "port")),
-        user = rpc_u, password = rpc_p,
-        wallet_filename=config.get("bitcoin-rpc", "wallet_filename").strip())
-    user_input = bh
-    print (user_input)
-    try:
-        height = int(user_input)
-        rpc.call("rescanblockchain", [height])
-    except ValueError:
-        pass
-
+    args = str("./bitcoin-0.16.3/bin/bitcoin-cli -rpcpassword=" + str(rpcpass) + " -rpcuser=user rescanblockchain " + str(bh) ).split()
+    
 def start_eps_rescan_1():
     start_eps_rescan(1)
 def start_eps_rescan_227088():

@@ -437,6 +437,7 @@ def verify_bitcoind():
 
 
     def transfer_public_keys_to_node(self):
+        import re
         dialog = WindowModalDialog(self, _("Master Public Keys Were Transferred to Full Node"))
         dialog.setMinimumSize(2000, 100)
         mpk_list = self.wallet.get_master_public_keys()

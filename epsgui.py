@@ -414,7 +414,7 @@ def verify_bitcoind():
         filedata_a="[master-public-keys]\\n"+filedata_a
         
         dialog = WindowModalDialog(self, _("Master Public Keys Were Transferred to Full Node"))
-        dialog.setMinimumSize(2000, 100)
+        dialog.setMinimumSize(1270, 100)
         mpk_list = self.wallet.get_master_public_keys()
         vbox = QVBoxLayout()
         wallet_type = self.wallet.storage.get('wallet_type', '')
@@ -439,7 +439,7 @@ def verify_bitcoind():
     def transfer_public_keys_to_node(self):
         import re
         dialog = WindowModalDialog(self, _("Master Public Keys Were Transferred to Full Node"))
-        dialog.setMinimumSize(2000, 100)
+        dialog.setMinimumSize(1270, 100)
         mpk_list = self.wallet.get_master_public_keys()
         vbox = QVBoxLayout()
         wallet_type = self.wallet.storage.get('wallet_type', '')

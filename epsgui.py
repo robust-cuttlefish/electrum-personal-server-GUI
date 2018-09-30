@@ -388,22 +388,22 @@ def verify_bitcoind():
         wallet_type = self.wallet.storage.get('wallet_type', '')
 
         import re
-        import os
-        import fileinput
-
         addresses_string=(str(l)[2:-2])
         if "imported" in str(wallet_type):
             addresses_string=addresses_string.replace("', '"," ")
-            
-            f = open("../eps.cfg",'r')
-            filedata = f.read()
-            f.close()
-            newdata = filedata
-            if str(addresses_string) not in str(filedata):
-                newdata = filedata.replace("[watch-only-addresses]\\n",str("[watch-only-addresses]\\n\\n" + str(addresses_string)[-11:] + " = " + str(addresses_string)+"\\n"))
-            f = open("../eps.cfg",'w')
-            f.write(newdata)
-            f.close()
+            address_strings=addresses_string.split(" ")
+            xx=0
+            for x in address_strings:
+                f = open("../eps.cfg",'r')
+                filedata = f.read()
+                f.close()
+                newdata = filedata
+                if str(address_strings[xx]) not in str(filedata):
+                    newdata = filedata.replace("[watch-only-addresses]\\n",str("[watch-only-addresses]\\n\\n" + str(address_strings[xx]) + " = " + str(address_strings[xx])+"\\n"))
+                f = open("../eps.cfg",'w')
+                f.write(newdata)
+                f.close()
+                xx+=1
 
         f = open("../eps.cfg",'r')
         filedata = f.read()

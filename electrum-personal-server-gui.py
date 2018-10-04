@@ -234,6 +234,8 @@ def start_eps():
 def start_eps_rescan(bh):
     start_eps()
     args = str("./bitcoin-0.16.3/bin/bitcoin-cli -rpcpassword=" + str(rpcpass) + " -rpcuser=user rescanblockchain " + str(bh) ).split()
+    popen = subprocess.Popen(args)
+    popen.wait()
     
 def start_eps_rescan_1():
     start_eps_rescan(1)

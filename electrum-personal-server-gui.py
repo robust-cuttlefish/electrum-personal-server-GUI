@@ -674,7 +674,7 @@ import subprocess""")
         Button(bottomframe2, fg='blue', text='2016-09-16(Sep),429840', command=start_eps_rescan_429840).pack( side = LEFT )
         Button(bottomframe2, fg='blue', text='2016-12-26(Dec),444816', command=start_eps_rescan_444816).pack( side = LEFT )
         Button(bottomframe, fg='blue', text='2017-04-11(Apr),461088', command=start_eps_rescan_461088).pack( side = LEFT )
-        Button(bottomframe, fg='blue', text='2017-07-19(Sep),476208', command=start_eps_rescan_476208).pack( side = LEFT )
+        Button(bottomframe, fg='blue', text='2017-07-19(Jul),476208', command=start_eps_rescan_476208).pack( side = LEFT )
         Button(bottomframe, fg='blue', text='2017-11-27(Nov),496080', command=start_eps_rescan_496080).pack( side = LEFT )
         Button(bottomframe, fg='blue', text='2018-07-03(Jul) 530000', command=start_eps_rescan_542000).pack( side = LEFT )
     else:

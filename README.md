@@ -1,5 +1,5 @@
 # electrum-personal-server-GUI
-gui in python-tk and shell script for Belcher's Electrum Personal Server
+gui in python-tk and shell script for chris-belcher's Electrum Personal Server
 
 
 Dependencies are the following:

@@ -19,7 +19,8 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
-#sudo apt install python3-tk pyqt5-dev-tools git python3-setuptools python3-pip tor
+#sudo apt install -y python3-tk tor pyqt5-dev-tools python3-pip python3-setuptools 
+# git
 #chmod +x eps-gui.py
 #./eps-gui.py
 from tkinter import *
@@ -35,7 +36,7 @@ import time
 root = Tk()
 root.title('Electrum Personal Server GUI')
 
-bitcoinsum="b'5d422a9d544742bc0df12427383f9c2517433ce7b58cf672b9a9b17c2ef51e4f  bitcoin-0.16.3-x86_64-linux-gnu.tar.gz\\n'"
+bitcoinsum="b'6ccc675ee91522eee5785457e922d8a155e4eb7d5524bd130eb0ef0f0c4a6008  bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz\\n'"
 electrumsum="b'9ff70ac0a8cefe188b05ca0e2865dd1d32eda624080051af769784c04dccc2dc  3.2.3.tar.gz\\n'"
 epssum="b'6c4f48068398df22e2326d8211a71f9d53a9ba28a40a5c555f519d5c84b61710  eps-v0.1.5.tar.gz\\n'"
 seconds = 0
@@ -53,7 +54,7 @@ def monitor_ibd():
     global seconds
     seconds += 1
     f = open('./bitcoind_status', 'w')
-    f.write("ps aux | grep bitcoin-0.16.3")
+    f.write("ps aux | grep bitcoin-0.17.0")
     f.close()
     args = str("chmod +x bitcoind_status").split()
     popen = subprocess.Popen(args)
@@ -97,7 +98,7 @@ def monitor_ibd():
     if "python3 ./server.py" in str(output):
         eps_status="eps *is* running"
 
-    args = str("./bitcoin-0.16.3/bin/bitcoin-cli -rpcpassword=" + str(rpcpass) + " -rpcuser=user getblockchaininfo").split()
+    args = str("./bitcoin-0.17.0/bin/bitcoin-cli -rpcpassword=" + str(rpcpass) + " -rpcuser=user getblockchaininfo").split()
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
     output = popen.stdout.read()
@@ -233,9 +234,9 @@ def start_eps():
 
 def start_eps_rescan(bh):
     start_eps()
-    args = str("./bitcoin-0.16.3/bin/bitcoin-cli -rpcpassword=" + str(rpcpass) + " -rpcuser=user rescanblockchain " + str(bh) ).split()
+    args = str("./bitcoin-0.17.0/bin/bitcoin-cli -rpcpassword=" + str(rpcpass) + " -rpcuser=user rescanblockchain " + str(bh) ).split()
     popen = subprocess.Popen(args)
-    popen.wait()
+    #popen.wait()
     
 def start_eps_rescan_1():
     start_eps_rescan(1)
@@ -307,7 +308,7 @@ def start_bitcoind():
     f = open('./.bitcoin/bitcoin.conf', 'w')
     f.write("txindex=1\nrpcpassword="+str(rpcpass)+"\nrpcuser=user\nserver=1\nwalletbroadcast=0")
     f.close()
-    args = "./bitcoin-0.16.3/bin/bitcoind -datadir=./.bitcoin -walletbroadcast=0".split()
+    args = "./bitcoin-0.17.0/bin/bitcoind -datadir=./.bitcoin -walletbroadcast=0".split()
     popen = subprocess.Popen(args)
 
 def start_all():
@@ -322,27 +323,27 @@ def verify_bitcoind():
         return
     checksumfail=0
 
-    if os.path.exists("./bitcoin-0.16.3-x86_64-linux-gnu.tar.gz")==False:
-        args = "wget https://bitcoincore.org/bin/bitcoin-core-0.16.3/bitcoin-0.16.3-x86_64-linux-gnu.tar.gz".split()
+    if os.path.exists("./bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz")==False:
+        args = "wget https://bitcoincore.org/bin/bitcoin-core-0.17.0.1/bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz".split()
         popen = subprocess.Popen(args)
         popen.wait()
-    args = "rm -rf ./bitcoin-0.16.3".split()
+    args = "rm -rf ./bitcoin-0.17.0".split()
     popen = subprocess.Popen(args)
     popen.wait()
-    args = "sha256sum bitcoin-0.16.3-x86_64-linux-gnu.tar.gz".split()
+    args = "sha256sum bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz".split()
     popen = subprocess.Popen(args, stdout=subprocess.PIPE)
     popen.wait()
     output = popen.stdout.read()
-    f = open('./bitcoin-0.16.3-x86_64-linux-gnu.tar.gz.sha256', 'w')
+    f = open('./bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz.SHA256SUM', 'w')
     f.write(str(output))
     f.close()
     if str(output)==bitcoinsum:
         checksums = checksums + "bitcoin checksums match"
-        args = "tar xf bitcoin-0.16.3-x86_64-linux-gnu.tar.gz".split()
+        args = "tar xf bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz".split()
         popen = subprocess.Popen(args)
         popen.wait()
     else:
-        args = "rm bitcoin-0.16.3-x86_64-linux-gnu.tar.gz".split()
+        args = "rm bitcoin-0.17.0.1-x86_64-linux-gnu.tar.gz".split()
         popen = subprocess.Popen(args)
         popen.wait()
         checksumfail=1
@@ -547,15 +548,15 @@ def verify_bitcoind():
         args = "pyrcc5 ./electrum-3.2.3-broadcast/icons.qrc -o ./electrum-3.2.3-broadcast/electrum/gui/qt/icons_rc.py".split()
         popen = subprocess.Popen(args)
         popen.wait()
-        if os.path.exists("./electrum-deps")==False:
-            f = open('./electrum-deps', 'w')
-            f.write("cd electrum-3.2.3\npip3 install .[fast]")
-            f.close()
-            args = "chmod +x ./electrum-deps".split()
-            popen = subprocess.Popen(args)
-            args = "bash ./electrum-deps".split()
-            popen = subprocess.Popen(args)
-            popen.wait()
+
+        f = open('./electrum-deps', 'w')
+        f.write("cd electrum-3.2.3\npip3 install PySocks dnspython ecdsa jsonrpclib-pelix six setuptools protobuf pyaes qdarkstyle qrcode idna chardet urllib3 certifi requests typing")
+        f.close()
+        args = "chmod +x ./electrum-deps".split()
+        popen = subprocess.Popen(args)
+        args = "bash ./electrum-deps".split()
+        popen = subprocess.Popen(args)
+        popen.wait()
     else:
         args = "rm 3.2.3.tar.gz".split()
         popen = subprocess.Popen(args)

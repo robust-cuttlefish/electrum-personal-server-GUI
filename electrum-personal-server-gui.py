@@ -20,7 +20,7 @@
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 #sudo apt install -y python3-tk tor pyqt5-dev-tools python3-pip python3-setuptools 
-# git
+# recommended: git, qrencode, zbar-tools
 #chmod +x eps-gui.py
 #./eps-gui.py
 from tkinter import *
@@ -664,19 +664,19 @@ import subprocess""")
         bottomframe3 = Frame(root)
         bottomframe3.pack( side = BOTTOM )
         Button(bottomframe3, fg='blue', text='2009-01-08(Jan),000001', command=start_eps_rescan_1).pack( side = LEFT )
-        Button(bottomframe3, fg='blue', text='2014-03-10(Apr),227088', command=start_eps_rescan_227088).pack( side = LEFT )
-        Button(bottomframe3, fg='blue', text='2014-03-10(Mar),272448', command=start_eps_rescan_272448).pack( side = LEFT )
-        Button(bottomframe3, fg='blue', text='2015-03-01(Mar),323712', command=start_eps_rescan_323712).pack( side = LEFT )
-        Button(bottomframe3, fg='blue', text='2015-10-01(Oct),354528', command=start_eps_rescan_354528).pack( side = LEFT )
-        Button(bottomframe2, fg='blue', text='2016-03-05(Mar),376992', command=start_eps_rescan_376992).pack( side = LEFT )
-        Button(bottomframe2, fg='blue', text='2016-07-15(Jul),396000', command=start_eps_rescan_396000).pack( side = LEFT )
-        Button(bottomframe2, fg='blue', text='2016-11-17(Nov),414000', command=start_eps_rescan_414000).pack( side = LEFT )
-        Button(bottomframe2, fg='blue', text='2017-03-07(Mar),429840', command=start_eps_rescan_429840).pack( side = LEFT )
-        Button(bottomframe2, fg='blue', text='2017-06-19(Jun),444816', command=start_eps_rescan_444816).pack( side = LEFT )
-        Button(bottomframe, fg='blue', text='2017-10-10(Oct),461088', command=start_eps_rescan_461088).pack( side = LEFT )
-        Button(bottomframe, fg='blue', text='2018-01-23(Jan),476208', command=start_eps_rescan_476208).pack( side = LEFT )
-        Button(bottomframe, fg='blue', text='2018-06-10(Jun),496080', command=start_eps_rescan_496080).pack( side = LEFT )
-        Button(bottomframe, fg='blue', text='rescan from 530000', command=start_eps_rescan_542000).pack( side = LEFT )
+        Button(bottomframe3, fg='blue', text='2013-03-23(Mar),227088', command=start_eps_rescan_227088).pack( side = LEFT )
+        Button(bottomframe3, fg='blue', text='2013-12-03(Dec),272448', command=start_eps_rescan_272448).pack( side = LEFT )
+        Button(bottomframe3, fg='blue', text='2014-10-06(Oct),323712', command=start_eps_rescan_323712).pack( side = LEFT )
+        Button(bottomframe3, fg='blue', text='2015-05-03(May),354528', command=start_eps_rescan_354528).pack( side = LEFT )
+        Button(bottomframe2, fg='blue', text='2015-10-03(Oct),376992', command=start_eps_rescan_376992).pack( side = LEFT )
+        Button(bottomframe2, fg='blue', text='2016-02-02(Feb),396000', command=start_eps_rescan_396000).pack( side = LEFT )
+        Button(bottomframe2, fg='blue', text='2016-06-02(Jun),414000', command=start_eps_rescan_414000).pack( side = LEFT )
+        Button(bottomframe2, fg='blue', text='2016-09-16(Sep),429840', command=start_eps_rescan_429840).pack( side = LEFT )
+        Button(bottomframe2, fg='blue', text='2016-12-26(Dec),444816', command=start_eps_rescan_444816).pack( side = LEFT )
+        Button(bottomframe, fg='blue', text='2017-04-11(Apr),461088', command=start_eps_rescan_461088).pack( side = LEFT )
+        Button(bottomframe, fg='blue', text='2017-07-19(Sep),476208', command=start_eps_rescan_476208).pack( side = LEFT )
+        Button(bottomframe, fg='blue', text='2017-11-27(Nov),496080', command=start_eps_rescan_496080).pack( side = LEFT )
+        Button(bottomframe, fg='blue', text='2018-07-03(Jul) 530000', command=start_eps_rescan_542000).pack( side = LEFT )
     else:
         Button(root, fg='blue', text='Checksum failed. Close this script, verify it, and run it again.', command=root.quit).pack()
 
